@@ -168,14 +168,14 @@ def retrieve_password():
 
 
 @app.route('/planets', methods=['GET'])
-def planets():
+def list_planets():
     planets_list = Planet.query.all()
     result = planets_schema.dump(planets_list)
     return jsonify(result)
 
 
 @app.route('/planets/<int:planet_id>', methods=["GET"])
-def planet_details(planet_id: int):
+def get_planet(planet_id: int):
     planet = Planet.query.filter_by(planet_id=planet_id).first()
     if planet:
         result = planet_schema.dump(planet)
@@ -217,13 +217,12 @@ def create_planet():
 
 @app.route('/planets/<int:planet_id>', methods=['PUT'])
 @jwt_required
-def update_planet():
+def update_planet(planet_id: int):
     if request.is_json:
         data = request.get_json()
     else:
         data = request.form
 
-    planet_id = int(data['planet_id'])
     planet = Planet.query.filter_by(planet_id=planet_id).first()
     if planet:
         planet.planet_name = data['planet_name']
