@@ -1,1 +1,1 @@
-Full course: https://www.linkedin.com/learning/building-restful-apis-with-flask
+Linkedin course: https://www.linkedin.com/learning/building-restful-apis-with-flask
